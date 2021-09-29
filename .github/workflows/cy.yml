@@ -30,7 +30,6 @@ jobs:
           uses: extenda/actions/jira-releasenotes@master
           with:
             jira-host: '${{ secrets.JIRA_URL }}'
-            jira-host: '${{ secrets.JIRA_URL }}'
             jira-project: TP
 
         - name: Create JIRA release
