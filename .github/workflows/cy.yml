@@ -12,15 +12,18 @@ jobs:
           with:
             fetch-depth: 0
 
-        - name: Update JIRA release notes
-          uses: extenda/actions/jira-releasenotes@master
-          with:
-            jira-host: '${{ secrets.JIRA_URL }}'
-            jira-project: TP
+#        - name: Update JIRA release notes
+#          uses: extenda/actions/jira-releasenotes@master
+#          with:
+#            jira-host: '${{ secrets.JIRA_URL }}'
+#            jira-project: TP
 
         - name: Create JIRA release
           uses: extenda/actions/jira-release@master
+          env:
+            JIRA_USERNAME: '${{ secrets.JIRA_USERNAME }}'
+            JIRA_PASSWORD: '${{ secrets.JIRA_PASSWORD }}'
           with:
             jira-host: '${{ secrets.JIRA_URL }}'
             jira-project: '${{ secrets.JIRA_PROJECT_KEY }}'
-            version: ${{ steps.outputs.semver.release-version }}
+            version: '1.0.X'
