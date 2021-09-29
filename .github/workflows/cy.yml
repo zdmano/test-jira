@@ -24,6 +24,17 @@ jobs:
 
         - uses: extenda/actions/conventional-version@master
           id: semver
+          with:
+            version-suffix: -SNAPSHOT
+
+        - name: Print outputs from semver
+          run: |
+            echo ${{ steps.semver.outputs.version }}
+            echo ${{ steps.semver.outputs.branch-name }}
+            echo ${{ steps.semver.outputs.branch-name-friendly }}
+            echo ${{ steps.semver.outputs.is-prerelease }}
+            echo ${{ steps.semver.outputs.short-sha }}
+            echo ${{ steps.semver.outputs.composed-version-string }}
 
         - name: Update JIRA release notes
           uses: extenda/actions/jira-releasenotes@master
