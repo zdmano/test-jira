@@ -1,72 +1,39 @@
 name: Release
 
 on:
-  push:
-    branches:
-      - main
-      - release/1.0.0
-#      - feature/*
-  pull_request:
-    branches:
-      - bugfix/*
-      - feature/*
-      - hotfix/*
-      - release/*
+  release:
+    types: ["prereleased"]
+    
 jobs:
-  deploy_to_test:
+  release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Deploy to Test
-        run: |
-          echo "Deploying to Test..."
-          echo "github.event_name: ${{github.event_name}}"
-          echo "github.ref: ${{github.ref}}"
-          echo "DEPLOY_STATE=successful"  >> $GITHUB_ENV
-      - name: Failed Deployment
-        if: failure()
-        run: echo "DEPLOY_STATE=failed" >> $GITHUB_ENV
-      - name: Parse Jira Keys from All Commits
-        id: jira_keys
-        if: always()
-        uses: HighwayThree/jira-extract-issue-keys@master
-        with:
-          is-pull-request: ${{ github.event_name == 'pull_request' }}
-          parse-all-commits: ${{ github.event_name == 'push' }}
+
+      - name: Create release
+        uses: extenda/actions/conventional-release@master
+        id: semver
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Confirm Deploy State and Jira Key Values
-        if: always()
-        run: |
-          echo "CLOUD_ID : ${{ secrets.CLOUD_ID }}"
-          echo "CLIENT_ID : ${{ secrets.CLIENT_ID }}"
-          echo "CLIENT_SECRET : ${{ secrets.CLIENT_SECRET }}"
-          echo "DEPLOY_STATE: ${{env.DEPLOY_STATE}}"
-          echo "Jira Keys: ${{steps.jira_keys.outputs.jira-keys}}"
-      - name: Push Deployment Info to Jira
-        if: steps.jira_keys.outputs.jira-keys != ''
-        id: push_deployment_info_to_jira
-        uses: HighwayThree/jira-upload-deployment-info@master
-        with:
-          cloud-instance-base-url: '${{ secrets.CLOUD_ID }}'
-          client-id: '${{ secrets.CLIENT_ID }}'
-          client-secret: '${{ secrets.CLIENT_SECRET }}'
-          deployment-sequence-number: '${{ github.run_id }}'
-          update-sequence-number: '${{ github.run_id }}'
-          issue-keys: "${{ steps.jira_keys.outputs.jira-keys }}"
-          display-name: "Deployment number ${{ github.run_number }}"
-          url: "${{github.event.repository.url}}/actions/runs/${{github.run_id}}"
-          description: "Development Deployment"
-          last-updated: '${{github.event.head_commit.timestamp}}'
-          label: 'Development Deployment'
-          state: '${{env.DEPLOY_STATE}}'
-          pipeline-id: '${{ github.repository }} ${{ github.workflow }}'
-          pipeline-display-name: 'Workflow: ${{ github.workflow }} (#${{ github.run_number }})'
-          pipeline-url: '${{github.event.repository.url}}/actions/runs/${{github.run_id}}'
-          environment-id: 'Development'
-          environment-display-name: 'Development'
-          environment-type: 'development'
-      - name: Confirm Jira Deploy Output
-        if: success()
-        run: |
-          echo "Jira Upload Deploy Info response: ${{steps.push_deployment_info_to_jira.outputs.response}}"
+  
+  jira-release:
+      runs-on: ubuntu-latest
+      needs: release
+      steps:
+        - uses: actions/checkout@v2
+
+        - uses: extenda/actions/conventional-version@master
+          id: semver
+
+        - name: Update JIRA release notes
+          uses: extenda/actions/jira-releasenotes@master
+          with:
+            jira-host: '${{ secrets.JIRA_URL }}'
+            jira-project: TP
+
+        - name: Create JIRA release
+          uses: extenda/actions/jira-release@master
+          with:
+            jira-host: '${{ secrets.JIRA_URL }}'
+            jira-project: '${{ secrets.JIRA_PROJECT_KEY }}'
+            version: ${{ steps.outputs.semver.release-version }}
