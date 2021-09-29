@@ -26,4 +26,4 @@ jobs:
           with:
             jira-host: '${{ secrets.JIRA_URL }}'
             jira-project: '${{ secrets.JIRA_PROJECT_KEY }}'
-            version: '1.0.X'
+            version: '1.0.0-stage'
