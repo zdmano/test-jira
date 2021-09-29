@@ -1,8 +1,9 @@
 name: Release
 
-on:
-  release:
-    types: ["prereleased"]
+on:  
+  push:
+    tags:
+      - 'v1.*.*-S'
     
 jobs:
   release:
@@ -21,6 +22,8 @@ jobs:
       needs: release
       steps:
         - uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
 
         - uses: extenda/actions/conventional-version@master
           id: semver
