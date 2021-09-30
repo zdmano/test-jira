@@ -9,7 +9,7 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - name: Event Body
-          run: cho "${{ github.event }}"
+          run: echo "${{ github.event }}"
         - name: Dump env
           run: env | sort
         - name: Dump GitHub context
