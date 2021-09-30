@@ -8,16 +8,15 @@ jobs:
   jira-release:
       runs-on: ubuntu-latest
       steps:
+        - name: Dump env
+          run: env | sort
+        - name: Dump GitHub context
+          env:
+            GITHUB_CONTEXT: ${{ toJson(github) }}
+          run: echo "$GITHUB_CONTEXT"
         - uses: actions/checkout@v2
           with:
             fetch-depth: 0
-
-#        - name: Update JIRA release notes
-#          uses: extenda/actions/jira-releasenotes@master
-#          with:
-#            jira-host: '${{ secrets.JIRA_URL }}'
-#            jira-project: TP
-
         - name: Create JIRA release
           uses: extenda/actions/jira-release@master
           env:
