@@ -31,5 +31,5 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         - name: Set fix version
           run: |
-            for id in ${{ steps.jira_keys.outputs.jira-keys }}; do curl -X POST -H 'Content-type: application/json' --data '{'{"issues": ["$id"] }'}' https://automation.atlassian.com/pro/hooks/fd9968e7a52227b00fcdb938c9097370894fa09f
+            for id in ${{ steps.jira_keys.outputs.jira-keys }}; do curl -X POST -H 'Content-type: application/json' --data '{'{"issues": ["$id"] }'}' https://automation.atlassian.com/pro/hooks/fd9968e7a52227b00fcdb938c9097370894fa09f; done
             
