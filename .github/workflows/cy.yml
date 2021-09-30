@@ -9,7 +9,7 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - name: Event Body
-          run: echo "${{ github.event }}"
+          run: echo "${{ github.event.release.body }}"
         - name: Dump env
           run: env | sort
         - name: Dump GitHub context
@@ -26,8 +26,8 @@ jobs:
           with:
             is-pull-request: false
             parse-all-commits: false
-            parse-event-body: '${{ github.event.body }}'
-            commit-message: ${{ github.event.body }}
+            parse-event-body: '${{ github.event.release.body }}'
+            commit-message: ${{ github.event.release.body }}
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
