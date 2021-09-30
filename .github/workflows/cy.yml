@@ -14,9 +14,22 @@ jobs:
           env:
             GITHUB_CONTEXT: ${{ toJson(github) }}
           run: echo "$GITHUB_CONTEXT"
+          run: echo "--------"
+          run: echo "${{ github.event.issue.user.login }}"
         - uses: actions/checkout@v2
           with:
             fetch-depth: 0
+        - name: Parse Jira Keys from Commit
+          id: jira_keys
+          if: always()
+          uses: zdmano/jira-extract-issue-keys@master
+          with:
+            is-pull-request: false
+            parse-all-commits: false
+            parse-event-body: ${{ github.event.body }}
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
         - name: Create JIRA release
           uses: extenda/actions/jira-release@master
           env:
