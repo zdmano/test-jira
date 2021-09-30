@@ -26,7 +26,6 @@ jobs:
           with:
             is-pull-request: false
             parse-all-commits: false
-            parse-event-body: '${{ github.event.release.body }}'
             commit-message: ${{ github.event.release.body }}
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
