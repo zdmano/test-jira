@@ -31,5 +31,5 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         - name: Set fix version
           run: |
-            IFS=',' read -ra KEYS <<< "${{ steps.jira_keys.outputs.jira-keys }}"; for id in "${KEYS[@]}"; do curl --globoff -v -X POST ${{JIRA_VERSION_WEBHOOK}}?issue=$id; done
+            IFS=',' read -ra KEYS <<< "${{ steps.jira_keys.outputs.jira-keys }}"; for id in "${KEYS[@]}"; do curl --globoff -v -X POST ${{secrets.JIRA_VERSION_WEBHOOK}}?issue=$id; done
             
