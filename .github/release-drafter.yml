@@ -15,5 +15,5 @@ categories:
       - 'bug'
 
 replacers:
-  - search: '/TP-(\d+)/gi'
-    replace: '[TP-$1](https://somejiralink.attlasian.net/TP-$1)'
+  - search: '/[A-Z][A-Z0-9]+-[0-9]+/gi'
+    replace: '[$1](https://somejiralink.attlasian.net/$1)'
