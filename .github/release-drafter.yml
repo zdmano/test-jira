@@ -16,4 +16,4 @@ categories:
 
 replacers:
   - search: '/[A-Z][A-Z0-9]+-[0-9]+/gi'
-    replace: 'https://somejiralink.attlasian.net/$1'
+    replace: '[TP-$1](https://somejiralink.attlasian.net/TP-$1)'
