@@ -26,17 +26,6 @@ jobs:
           with:
             is-pull-request: false
             parse-all-commits: false
-            parse-event-body: '${{ github.event.release.body }}'
             commit-message: ${{ github.event.release.body }}
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-        - name: Create JIRA release
-          uses: extenda/actions/jira-release@master
-          env:
-            JIRA_USERNAME: '${{ secrets.JIRA_USERNAME }}'
-            JIRA_PASSWORD: '${{ secrets.JIRA_PASSWORD }}'
-          with:
-            jira-host: '${{ secrets.JIRA_URL }}'
-            jira-project: '${{ secrets.JIRA_PROJECT_KEY }}'
-            version: '1.0.0-stage'
