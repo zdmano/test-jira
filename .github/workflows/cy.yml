@@ -20,6 +20,7 @@ jobs:
         - name: Parse Jira Keys from Commit
           id: jira_keys
           if: always()
+          run: echo ${{ github.event.body }}
           uses: zdmano/jira-extract-issue-keys@master
           with:
             is-pull-request: false
