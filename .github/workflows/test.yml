@@ -11,5 +11,5 @@ jobs:
         run: echo "Master"
 
       - name: Test on branch
-        if: github.ref != 'refs/heads/master'
+        if: github.ref != 'refs/heads/main'
         run: echo "Not master"
