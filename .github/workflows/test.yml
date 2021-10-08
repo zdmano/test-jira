@@ -1,0 +1,15 @@
+name: Test Branch Condition
+
+on: [push]
+
+jobs:
+  test_on_push:
+    runs-on: ubuntu-18.04
+
+    - name: Test on master
+      if: github.ref == 'refs/heads/master'
+      run: echo "Master"
+
+    - name: Test on branch
+      if: github.ref != 'refs/heads/master'
+      run: echo "Not master"
