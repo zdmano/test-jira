@@ -2,9 +2,13 @@ name: Test Branch Condition
 
 on: [push]
 
+env:
+  ## Sets environment variable
+  API_KEY: XXXXXXXXXXXX  
+
 jobs:
-  test_reuse:
+  test_on_push:
     uses: zdmano/test-jira/.github/workflows/reusable.yml@main
     with:
-      secrets:
-        TOKEN: 'bla'
+      ENVIRONMENT: staging
+
