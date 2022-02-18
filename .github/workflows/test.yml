@@ -10,5 +10,5 @@ jobs:
   test_on_push:
     uses: zdmano/test-jira/.github/workflows/reusable.yml@main
     with:
-      ENVIRONMENT: env
+      ENVIRONMENT: ${{env}}
 
