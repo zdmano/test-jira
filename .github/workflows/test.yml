@@ -2,6 +2,9 @@ name: Test Branch Condition
 
 on: [push]
 
+  env:
+      DB_CONNECTION_STRING: postgres://dashuser:dashpassword@localhost:5433/dashboard
+   
 jobs:
   test_on_push:
     uses: zdmano/test-jira/.github/workflows/reusable.yml@main
