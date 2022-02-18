@@ -4,12 +4,9 @@ on: [push]
 
 jobs:
   test_on_push:
-    runs-on: ubuntu-18.04
-    steps:
-      - name: Test on master
-        if: github.ref == 'refs/heads/main'
-        run: echo "Master"
+    env:
+      DB_CONNECTION_STRING: postgres://dashuser:dashpassword@localhost:5433/dashboard
+    uses: zdmano/test-jira/.github/workflows/reusable.yml@master
+    with:
+      ENVIRONMENT: env
 
-      - name: Test on branch
-        if: github.ref != 'refs/heads/main'
-        run: echo "Not master"
