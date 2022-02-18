@@ -23,6 +23,8 @@ jobs:
 
       - name: set envs
         environment: ${{ inputs.ENVIRONMENT }} || development
+        run: |
+          echo 'set envs'
 
       - run : |
           echo 'printing envs'
