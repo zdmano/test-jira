@@ -6,7 +6,7 @@ jobs:
   test_on_push:
     env:
       DB_CONNECTION_STRING: postgres://dashuser:dashpassword@localhost:5433/dashboard
-    uses: zdmano/test-jira/.github/workflows/reusable.yml@master
+    uses: zdmano/test-jira/.github/workflows/reusable.yml@main
     with:
       ENVIRONMENT: env
 
