@@ -24,3 +24,6 @@ jobs:
       - run : |
           echo 'printing envs'
           env
+      - run : |
+          echo 'printing super secret'
+          echo "$SUPER_SECRET_ENV"
