@@ -19,6 +19,11 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ inputs.ENVIRONMENT }}
     steps:
+      - name: set env
+        environment: development
+        if: ${{inputs.ENVIRONMENT}}
+        environment: ${{ inputs.ENVIRONMENT }}
+
       - uses: actions/checkout@v2
 
       - run : |
