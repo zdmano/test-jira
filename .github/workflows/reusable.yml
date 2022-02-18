@@ -17,7 +17,7 @@ jobs:
   reuse:
     name: my-job
     runs-on: ubuntu-latest
-    environment: ${{ inputs.ENVIRONMENT }} || development
+    environment: ${{ inputs.ENVIRONMENT }}
     steps:
       - uses: actions/checkout@v2
 
