@@ -17,13 +17,10 @@ jobs:
   reuse:
     name: my-job
     runs-on: ubuntu-latest
-    environment: ${{ inputs.ENVIRONMENT }}
+    env: ${{ inputs.ENVIRONMENT }}
     steps:
       - uses: actions/checkout@v2
 
       - run : |
           echo 'printing envs'
           env
-      - run : |
-          echo 'printing inputs'
-          ${{inputs.ENVIRONMENT}}
