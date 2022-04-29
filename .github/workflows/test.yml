@@ -15,7 +15,7 @@ jobs:
         uses: kaliber5/action-get-release@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          latest: true
+          draft: true
       - name: Ouput info
         run: echo ${{steps.latest_release.outputs.id}} ${{steps.latest_release.outputs.name}} ${{steps.latest_release.id}} ${{steps.latest_release.draft}} ${{steps.latest_release.created_at}}
 
