@@ -17,6 +17,6 @@ jobs:
           token: ${{ github.token }}
           latest: true
       - name: Ouput info
-        run: echo ${{latest_release}}
+        run: echo ${{steps.latest_release}}
 
 
