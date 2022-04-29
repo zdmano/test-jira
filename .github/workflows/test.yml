@@ -17,6 +17,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           latest: true
       - name: Ouput info
-        run: echo ${{steps.latest_release.outputs}} ${{steps.latest_release.name}} ${{steps.latest_release.id}} ${{steps.latest_release.draft}} ${{steps.latest_release.created_at}}
+        run: echo ${{steps.latest_release.outputs.id}} ${{steps.latest_release.outputs.name}} ${{steps.latest_release.id}} ${{steps.latest_release.draft}} ${{steps.latest_release.created_at}}
 
 
