@@ -7,8 +7,15 @@ env:
   API_KEY: XXXXXXXXXXXX  
 
 jobs:
-  test_on_push:
-    uses: zdmano/test-jira/.github/workflows/reusable.yml@main
-    with:
-      ENVIRONMENT: staging
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get latest release
+        id: latest_release
+        uses: kaliber5/action-get-release@v1
+        with:
+          token: ${{ github.token }}
+          latest: true
+        run: echo ${{latest_release}}
+
 
