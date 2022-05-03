@@ -22,7 +22,7 @@ jobs:
       - name: Create JIRA release
         env:
           JIRA_USERNAME: ${{ secrets.JIRA_USERNAME }}
-          JIRA_PASSWORD: ${{ secrets.JIRA_PASSWORDS }}
+          JIRA_PASSWORD: ${{ secrets.JIRA_PASSWORD }}
         uses: extenda/actions/jira-release@v0
         with:
           jira-host: ${{ secrets.JIRA_URL }}
