@@ -27,5 +27,5 @@ jobs:
         with:
           jira-host: ${{ secrets.JIRA_URL }}
           jira-project: TEST
-          version: ${{ steps.release_drafter.outputs.name }}
+          version: ${{ steps.latest_release.outputs.name }}
 
