@@ -25,7 +25,7 @@ jobs:
         env:
           JIRA_USERNAME: ${{ secrets.JIRA_USERNAME }}
           JIRA_PASSWORD: ${{ secrets.JIRA_PASSWORD }}
-        uses: extenda/actions/jira-release@v0
+        uses: zdmano/jira-release@main
         with:
           jira-host: ${{ secrets.JIRA_URL }}
           jira-project: TEST
