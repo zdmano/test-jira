@@ -7,22 +7,13 @@ env:
   API_KEY: XXXXXXXXXXXX  
 
 jobs:
-  update_release_draft:
+  test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
       - uses: release-drafter/release-drafter@master
         id: release_drafter
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Ouput info
-        run: echo ${{steps.release_drafter.outputs.id}} ${{steps.release_drafter.outputs.name}} 
-
-  test:
-    runs-on: ubuntu-latest
-    steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
