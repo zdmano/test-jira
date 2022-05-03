@@ -10,10 +10,11 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      with:
-        ref: ${{ github.event.pull_request.head.ref }}
-        fetch-depth: 0
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
       - name: Get latest release
         id: latest_release
         uses: kaliber5/action-get-release@v1
