@@ -20,6 +20,9 @@ jobs:
       - name: Ouput info
         run: echo ${{steps.latest_release.outputs.id}} ${{steps.latest_release.outputs.name}} ${{steps.latest_release.id}} ${{steps.latest_release.draft}} ${{steps.latest_release.created_at}}
       - name: Create JIRA release
+        env:
+          JIRA_USERNAME: ${{ secrets.JIRA_USERNAME }}
+          JIRA_PASSWORD: ${{ secrets.JIRA_PASSWORDS }}
         uses: extenda/actions/jira-release@v0
         with:
           jira-host: ${{ secrets.JIRA_URL }}
