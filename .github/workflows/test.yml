@@ -19,5 +19,10 @@ jobs:
           tag_name: v9.1.0
       - name: Ouput info
         run: echo ${{steps.latest_release.outputs.id}} ${{steps.latest_release.outputs.name}} ${{steps.latest_release.id}} ${{steps.latest_release.draft}} ${{steps.latest_release.created_at}}
-
+      - name: Create JIRA release
+        uses: extenda/actions/jira-release@v0
+        with:
+          jira-host: ${{ secrets.JIRA_URL }}
+          jira-project: TEST
+          version: ${{ steps.release_drafter.outputs.name }}
 
