@@ -17,6 +17,8 @@ jobs:
         id: release_drafter
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Ouput info
+        run: echo ${{steps.release_drafter.outputs.id}} ${{steps.release_drafter.outputs.name}} 
 
   test:
     runs-on: ubuntu-latest
