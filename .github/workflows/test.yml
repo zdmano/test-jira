@@ -17,6 +17,7 @@ jobs:
         with:
           fetch-depth: 0
       - uses: release-drafter/release-drafter@master
+        id: release_drafter
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   test:
