@@ -9,6 +9,9 @@ env:
 jobs:
   release_drafter:
     runs-on: ubuntu-latest
+    outputs:
+      id: ${{ steps.release_drafter.id }}
+      name: ${{ steps.release_drafter.name }}
     steps:
       - uses: actions/checkout@v2
         with:
