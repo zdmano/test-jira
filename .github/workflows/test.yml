@@ -35,7 +35,7 @@ jobs:
         env:
           JIRA_USERNAME: ${{ secrets.JIRA_USERNAME }}
           JIRA_PASSWORD: ${{ secrets.JIRA_PASSWORD }}
-        uses: zdmano/jira-release@main
+        uses: zdmano/jira-release@1.0.0
         with:
           jira-host: ${{ secrets.JIRA_URL }}
           version: ${{ needs.release_drafter.outputs.name }}
