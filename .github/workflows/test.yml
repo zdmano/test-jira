@@ -38,7 +38,6 @@ jobs:
         uses: zdmano/jira-release@main
         with:
           jira-host: ${{ secrets.JIRA_URL }}
-          jira-project: TEST
           version: ${{ needs.release_drafter.outputs.name }}
-          jira-keys: TEST-1,TEST-2,TEST-3
+          jira-keys: TEST-1
 
