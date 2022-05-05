@@ -39,5 +39,5 @@ jobs:
         with:
           jira-host: ${{ secrets.JIRA_URL }}
           version: ${{ needs.release_drafter.outputs.name }}
-          jira-keys: TEST-1
+          jira-keys: TEST-4
 
