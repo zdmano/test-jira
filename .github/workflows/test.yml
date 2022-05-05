@@ -12,6 +12,7 @@ jobs:
     outputs:
       id: ${{ steps.release_drafter.outputs.id }}
       name: ${{ steps.release_drafter.outputs.name }}
+      url: ${{ steps.release_drafter.outputs.html_url }}
     steps:
       - uses: actions/checkout@v2
         with:
@@ -35,9 +36,10 @@ jobs:
         env:
           JIRA_USERNAME: ${{ secrets.JIRA_USERNAME }}
           JIRA_PASSWORD: ${{ secrets.JIRA_PASSWORD }}
-        uses: zdmano/jira-release@1.0.0
+        uses: zdmano/jira-release@main
         with:
           jira-host: ${{ secrets.JIRA_URL }}
           version: ${{ needs.release_drafter.outputs.name }}
-          jira-keys: 
+          release-url: ${{ needs.release_drafter.outputs.url}}
+          jira-keys: TEST-2,TEST-3
 
